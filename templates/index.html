@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Code Document AI</title>    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='images/glob.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1 class="app-title">Code Document AI</h1>
+                <div class="header-controls">
+                <div class="user-profile">
+                    <div class="user-info" onclick="toggleProfileMenu(event)">
+                        <span class="user-greeting">Hi, matias.suarez@globant.com</span>
+                        <div class="avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="profile-menu" id="profileMenu">
+                            <div class="menu-item">
+                                <i class="fas fa-user"></i>
+                                <span>Profile</span>
+                            </div>
+                            <div class="menu-item">
+                                <i class="fas fa-cog"></i>
+                                <span>Settings</span>
+                            </div>
+                            <div class="menu-divider"></div>
+                            <div class="theme-menu-item">
+                                <div class="theme-switch-wrapper">
+                                    <span class="theme-label">Dark Mode</span>
+                                    <label class="theme-switch" for="checkbox">
+                                        <input type="checkbox" id="checkbox" />
+                                        <div class="slider round">
+                                            <i class="fas fa-sun"></i>
+                                            <i class="fas fa-moon"></i>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="menu-divider"></div>
+                            <div class="menu-item logout" onclick="handleLogout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="config-section">
+            <div class="form-group">
+                <label for="aiModel">AI Model:</label>
+                <select id="aiModel">
+                    <option value="openai/gpt-4o">GPT-4o</option>
+                    <option value="openai/gpt-4">GPT-4</option>
+                    <option value="openai/gpt-3">GPT-3</option>
+                    <option value="openai/gpt-35-turbo">GPT-3.5 Turbo</option>
+                    <option value="openai/davinci">Davinci</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="customPrompt">Documentation Instructions:</label>
+                <textarea id="customPrompt" placeholder="Describe how you want the documentation to be generated. For example: 'Generate documentation following Google's style' or 'Document the code in detail including usage examples'..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="outputFormat">Output Format:</label>
+                <select id="outputFormat">
+                    <option value="md">Markdown (.md)</option>
+                    <option value="html">HTML</option>
+                    <option value="doc">Document (.doc)</option>
+                </select>
+            </div>
+
+            <div class="input-section">
+                <input type="text" id="path" placeholder="Enter project path">
+                <button onclick="generateDocs()" class="primary-button">Generate Documentation</button>
+            </div>
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            Generating documentation
+        </div>
+
+        <div id="results" class="results-section"></div>
+
+        <div id="download-section" class="download-section" style="display: none;">
+            <button onclick="downloadDocs()" class="download-button">
+                Download Documentation
+            </button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
